@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
-use Jobyh\ReactMake\Support\CommandsProvider;
+use FullStackAppCo\ReactMake\Support\CommandsProvider;
 
 class ReactComponentCommandTest extends TestCase {
 
