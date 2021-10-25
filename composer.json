@@ -1,23 +1,21 @@
 {
-  "name": "jobyh/laravel-react-make",
+  "name": "fsac/laravel-react-make",
   "description": "Artisan command to generate React components",
   "keywords": [
-    "Jobyh",
     "laravel",
     "react",
-    "artisan",
-    "generator"
+    "artisan"
   ],
   "license": "MIT",
   "authors": [
     {
       "name": "Joby Harding",
-      "email": "joby@jobyharding.com"
+      "email": "code@fullstackapp.co"
     }
   ],
   "autoload": {
     "psr-4": {
-      "Jobyh\\ReactMake\\": "src"
+      "FullStackAppCo\\ReactMake\\": "src"
     }
   },
   "minimum-stability": "dev",
@@ -31,7 +29,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Jobyh\\ReactMake\\Support\\CommandsProvider"
+        "FullStackAppCo\\ReactMake\\Support\\CommandsProvider"
       ]
     }
   },
