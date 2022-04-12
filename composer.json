@@ -29,7 +29,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "ServiceProvider"
+        "FullStackAppCo\\ReactMake\\ServiceProvider"
       ]
     }
   },
