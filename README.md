@@ -1,7 +1,7 @@
 # Laravel React Make
 ![Build Status](https://github.com/FullStackAppCo/laravel-react-make/actions/workflows/tests.yml/badge.svg)
 
-`artisan react:make` your function and class components. Rad.
+`artisan make:react` your React  function and class components. Rad.
 
 [Read the docs](https://fullstackapp.co/docs/laravel-react-make)
 
