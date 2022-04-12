@@ -3,7 +3,7 @@
 namespace FullStackAppCo\ReactMake;
 
 use Illuminate\Support\ServiceProvider as BaseProvider;
-use FullStackAppCo\ReactMake\Console\Commands\ReactComponentCommand;
+use FullStackAppCo\ReactMake\Console\Commands\ReactMakeCommand;
 
 class ServiceProvider extends BaseProvider
 {
@@ -23,7 +23,7 @@ class ServiceProvider extends BaseProvider
         }
 
         $this->commands([
-            ReactComponentCommand::class,
+            ReactMakeCommand::class,
         ]);
 
         $publishes = [];

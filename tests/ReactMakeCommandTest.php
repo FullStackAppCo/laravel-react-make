@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
 use FullStackAppCo\ReactMake\ServiceProvider;
 
-class ReactComponentCommandTest extends TestCase {
+class ReactMakeCommandTest extends TestCase {
 
     protected function getPackageProviders($app)
     {
