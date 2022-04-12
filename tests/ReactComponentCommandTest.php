@@ -5,13 +5,15 @@ use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
-use FullStackAppCo\ReactMake\Support\CommandsProvider;
+use FullStackAppCo\ReactMake\ServiceProvider;
 
 class ReactComponentCommandTest extends TestCase {
 
     protected function getPackageProviders($app)
     {
-        return [CommandsProvider::class];
+        return [
+            ServiceProvider::class
+        ];
     }
 
     public function test_it_requires_name_parameter()
@@ -153,7 +155,7 @@ class ReactComponentCommandTest extends TestCase {
 
         $this->assertSame(0, $result);
 
-        foreach (CommandsProvider::stubs() as $stub) {
+        foreach (ServiceProvider::stubs() as $stub) {
             $this->assertTrue(File::exists(base_path("stubs/{$stub}")), "Stub {$stub} was not published.");
         }
     }

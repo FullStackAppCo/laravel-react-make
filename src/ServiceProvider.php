@@ -1,11 +1,11 @@
 <?php
 
-namespace FullStackAppCo\ReactMake\Support;
+namespace FullStackAppCo\ReactMake;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseProvider;
 use FullStackAppCo\ReactMake\Console\Commands\ReactComponentCommand;
 
-class CommandsProvider extends ServiceProvider
+class ServiceProvider extends BaseProvider
 {
 
     public static function stubs()
@@ -29,7 +29,7 @@ class CommandsProvider extends ServiceProvider
         $publishes = [];
 
         foreach (static::stubs() as $stub) {
-            $publishes[__DIR__ . "/../../stubs/{$stub}"] = base_path("stubs/{$stub}");
+            $publishes[__DIR__ . "/../stubs/{$stub}"] = base_path("stubs/{$stub}");
         }
 
         $this->publishes($publishes, 'react-stub');
