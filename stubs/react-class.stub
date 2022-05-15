@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-class DummyComponent extends React.Component {
+export default class DummyComponent extends React.Component {
     render() {
         return (
             {/* */}
@@ -8,4 +9,10 @@ class DummyComponent extends React.Component {
     };
 }
 
-export default DummyComponent;
+DummyComponent.propTypes = {
+    //
+};
+
+DummyComponent.defaultProps = {
+    //
+};
