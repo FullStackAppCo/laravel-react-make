@@ -1,0 +1,20 @@
+import React from "react";
+
+interface DummyComponentProps {
+    //
+}
+
+interface DummyComponentState {
+    //
+}
+
+export default class DummyComponent extends React.Component<DummyComponentProps, DummyComponentState> {
+    state: DummyComponentState = {
+        //
+    }
+    render() {
+        return (
+            {/* */}
+        );
+    };
+}

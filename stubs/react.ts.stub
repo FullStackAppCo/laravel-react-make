@@ -1,0 +1,11 @@
+import React from "react";
+
+interface DummyComponentProps {
+    //
+}
+
+export default function DummyComponent({}: DummyComponentProps) {
+    return (
+      {/* */}
+    );
+}

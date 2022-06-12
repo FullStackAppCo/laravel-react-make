@@ -201,4 +201,75 @@ class ReactMakeCommandTest extends TestCase {
         $result = Artisan::call('make:react', ['name' => 'sub/dir/TestComponent']);
         $this->assertSame(0, $result);
     }
+
+    public function test_it_supports_typescript()
+    {
+        $this->mock(Filesystem::class, function(MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../stubs/react.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
+        $this->assertSame(0, $result);
+    }
+
+    public function test_it_uses_tsx_extension()
+    {
+        $this->mock(Filesystem::class, function(MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../stubs/react.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/components/TestComponent.tsx'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', [
+            'name' => 'TestComponent',
+            '--typescript' => true,
+            '--jsx' => true,
+        ]);
+        $this->assertSame(0, $result);
+    }
+
+    public function test_it_uses_typescript_class_component_stub()
+    {
+        $this->mock(Filesystem::class, function(MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../stubs/react-class.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', [
+            'name' => 'TestComponent',
+            '--class' => true,
+            '--typescript' => true,
+        ]);
+        $this->assertSame(0, $result);
+    }
 }
