@@ -1,18 +1,18 @@
 <?php
 
+use FullStackAppCo\ReactMake\ServiceProvider;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Orchestra\Testbench\TestCase;
-use Illuminate\Filesystem\Filesystem;
 use Mockery\MockInterface;
-use FullStackAppCo\ReactMake\ServiceProvider;
+use Orchestra\Testbench\TestCase;
 
-class ReactMakeCommandTest extends TestCase {
-
+class ReactMakeCommandTest extends TestCase
+{
     protected function getPackageProviders($app)
     {
         return [
-            ServiceProvider::class
+            ServiceProvider::class,
         ];
     }
 
@@ -25,7 +25,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_checks_if_component_already_exists()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             $filepath = resource_path('js/components/TestComponent.js');
 
             // Stubs.
@@ -52,8 +52,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_creates_directories()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
-
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -76,7 +75,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_retrieves_stub()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -85,7 +84,7 @@ class ReactMakeCommandTest extends TestCase {
             ]);
 
             $mock->shouldReceive('get')
-                ->with(realpath(__DIR__ . '/../stubs/react.stub'))
+                ->with(realpath(__DIR__.'/../stubs/react.stub'))
                 ->once();
         });
 
@@ -95,7 +94,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_writes_component()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -114,7 +113,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_uses_jsx_extension()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -165,7 +164,7 @@ class ReactMakeCommandTest extends TestCase {
         File::deleteDirectory(base_path('stubs'));
         File::deleteDirectory(resource_path('js/components'));
 
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -174,7 +173,7 @@ class ReactMakeCommandTest extends TestCase {
             ]);
 
             $mock->shouldReceive('get')
-                ->with(realpath(__DIR__ . '/../stubs/react-class.stub'))
+                ->with(realpath(__DIR__.'/../stubs/react-class.stub'))
                 ->once();
         });
 
@@ -185,7 +184,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_correctly_replaces_dummy_component()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -204,7 +203,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_supports_typescript()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -212,7 +211,7 @@ class ReactMakeCommandTest extends TestCase {
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
@@ -225,7 +224,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_uses_tsx_extension()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -233,7 +232,7 @@ class ReactMakeCommandTest extends TestCase {
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.tsx'), 'template content'])
@@ -250,7 +249,7 @@ class ReactMakeCommandTest extends TestCase {
 
     public function test_it_uses_typescript_class_component_stub()
     {
-        $this->mock(Filesystem::class, function(MockInterface $mock) {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
             $mock->allows([
                 'exists' => false,
@@ -258,7 +257,7 @@ class ReactMakeCommandTest extends TestCase {
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../stubs/react-class.ts.stub'))
+                ->with(realpath(__DIR__.'/../stubs/react-class.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])

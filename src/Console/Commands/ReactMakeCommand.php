@@ -13,7 +13,7 @@ class ReactMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = <<<TEXT
+    protected $signature = <<<'TEXT'
 make:react
     {name : The name of the React component}
     {--x|jsx : Use .jsx file extension (tsx when used in combination with --typescript)}
@@ -42,17 +42,19 @@ TEXT;
         $this->files = $files;
     }
 
-    protected function getPath(string $name) : string
+    protected function getPath(string $name): string
     {
-        $relative = join(DIRECTORY_SEPARATOR, ['js', 'components', "$name.{$this->getExtension()}"]);
+        $relative = implode(DIRECTORY_SEPARATOR, ['js', 'components', "$name.{$this->getExtension()}"]);
+
         return App::resourcePath($relative);
     }
 
-    protected function getExtension() : string {
-        return ($this->option('typescript') ? 't' : 'j') . ($this->option('jsx') ? 'sx' : 's');
+    protected function getExtension(): string
+    {
+        return ($this->option('typescript') ? 't' : 'j').($this->option('jsx') ? 'sx' : 's');
     }
 
-    protected function getStub() : string
+    protected function getStub(): string
     {
         $stub = $this->option('class') ? 'react-class' : 'react';
         $stub .= $this->option('typescript') ? '.ts' : '';
@@ -64,10 +66,10 @@ TEXT;
             return $override;
         }
 
-        return realpath(join(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'stubs', $stub]));
+        return realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'stubs', $stub]));
     }
 
-    protected function makeDirectory(string $path) : string
+    protected function makeDirectory(string $path): string
     {
         $dirpath = dirname($path);
 
@@ -78,9 +80,9 @@ TEXT;
         return $path;
     }
 
-    protected function buildComponent(string $name) : string
+    protected function buildComponent(string $name): string
     {
-        $stub = $this->files->get($this->getStub()) ;
+        $stub = $this->files->get($this->getStub());
 
         return str_replace('DummyComponent', basename($name), $stub);
     }
@@ -102,6 +104,6 @@ TEXT;
 
         $this->makeDirectory($path);
         $this->files->put($this->getPath($name), $this->buildComponent($name));
-        $this->info($name . ' created successfully');
+        $this->info($name.' created successfully');
     }
 }
