@@ -1,5 +1,9 @@
 # Release Notes
 
+## v3.0.0
+- Support Laravel 10
+- Dropped support for laravel 8
+
 ## v2.0.0
 - Support Laravel 9
 - Dropped support for Laravel < 8
