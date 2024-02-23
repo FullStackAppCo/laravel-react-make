@@ -1,13 +1,64 @@
-# Laravel React Make
-![Build Status](https://github.com/FullStackAppCo/laravel-react-make/actions/workflows/tests.yml/badge.svg)
+---
+published: true
+title: Laravel React Make
+description: Artisan command to generate React components with support for TypeScript.
+license: MIT
+source: FullStackAppCo/laravel-react-make
+pkg: fsac/laravel-react-make
+---
 
-`artisan make:react` your React function and class components. Includes TypeScript support. Rad 😎
+## Laravel Support
 
-[Read the docs](https://fullstackapp.co/docs/laravel-react-make)
-
-## Support
 | Laravel | Laravel React Make |
 |---------|--------------------|
 | 10, 9   | 3                  |
 | 9, 8    | 2                  |
 | 8, 7, 6 | 1                  |
+
+## Installation
+In your Laravel directory install via Composer.
+```bash
+composer require --dev fsac/laravel-react-make
+```
+
+## Basic Usage
+Generate a React function component in the file `MyComponent.js` under `resources/js/components`.
+```bash
+php artisan make:react PrimaryButton
+# -> resources/js/components/PrimaryButton.js
+```
+
+You may also include subdirectories:
+```bash
+php artisan make:react buttons/Primary
+# -> resources/js/components/buttons/Primary.js
+```
+
+## Advanced Usage
+Use `.jsx` file extension instead of the default `.js`. The short version `-x` may also be used:
+```bash
+php artisan make:react --jsx PrimaryButton
+# -> resources/js/components/PrimaryButton.jsx
+```
+
+### TypeScript
+The command also supports generating TypeScript components. The short version `-t` may also be used:
+```bash
+php artisan make:react --typescript PrimaryButton
+# -> resources/js/components/PrimaryButton.ts
+```
+
+When used in combination with the `--jsx` option the `.tsx` suffix will be used. The following
+example uses short option variants:
+```bash
+php artisan make:react -tx PrimaryButton
+# -> resources/js/components/PrimaryButton.tsx
+```
+
+### Customising Stubs
+If you'd like to customise the default templates used to generate components you may publish them
+to the `stubs` directory:
+
+```bash
+php artisan vendor:publish --tag react-stub
+```
