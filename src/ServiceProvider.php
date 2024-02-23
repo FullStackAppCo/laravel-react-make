@@ -24,6 +24,11 @@ class ServiceProvider extends BaseProvider
             ReactMakeCommand::class,
         ]);
 
+        $this->publishesStubs();
+    }
+
+    protected function publishesStubs(): void
+    {
         $publishes = [];
 
         foreach (static::stubs() as $stub) {

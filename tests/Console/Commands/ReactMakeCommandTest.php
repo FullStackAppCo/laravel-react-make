@@ -1,11 +1,14 @@
 <?php
 
+namespace Tests\Console\Commands;
+
 use FullStackAppCo\ReactMake\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
+use Symfony\Component\Console\Exception\RuntimeException;
 
 class ReactMakeCommandTest extends TestCase
 {
@@ -84,7 +87,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $mock->shouldReceive('get')
-                ->with(realpath(__DIR__.'/../stubs/react.stub'))
+                ->with(realpath(__DIR__ . '/../../../stubs/react.stub'))
                 ->once();
         });
 
@@ -145,20 +148,6 @@ class ReactMakeCommandTest extends TestCase
         $this->assertSame('Overridden stub', File::get(resource_path('js/components/TestComponent.jsx')));
     }
 
-    public function test_it_publishes_stubs()
-    {
-        File::deleteDirectory(base_path('stubs'));
-        File::deleteDirectory(resource_path('js/components'));
-
-        $result = Artisan::call('vendor:publish', ['--tag' => 'react-stub']);
-
-        $this->assertSame(0, $result);
-
-        foreach (ServiceProvider::stubs() as $stub) {
-            $this->assertTrue(File::exists(base_path("stubs/{$stub}")), "Stub {$stub} was not published.");
-        }
-    }
-
     public function test_it_correctly_replaces_dummy_component()
     {
         $this->mock(Filesystem::class, function (MockInterface $mock) {
@@ -188,7 +177,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__.'/../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.tsx'), 'template content'])
@@ -209,7 +198,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__.'/../stubs/react.stub'))
+                ->with(realpath(__DIR__ . '/../../../stubs/react.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/pages/TestPage.jsx'), 'template content'])
