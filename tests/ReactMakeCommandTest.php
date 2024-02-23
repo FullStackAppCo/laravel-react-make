@@ -26,7 +26,7 @@ class ReactMakeCommandTest extends TestCase
     public function test_it_checks_if_component_already_exists()
     {
         $this->mock(Filesystem::class, function (MockInterface $mock) {
-            $filepath = resource_path('js/components/TestComponent.js');
+            $filepath = resource_path('js/components/TestComponent.jsx');
 
             // Stubs.
             $mock->allows([
@@ -103,7 +103,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/components/TestComponent.js'), 'template content'])
+                ->withArgs([resource_path('js/components/TestComponent.jsx'), 'template content'])
                 ->once();
         });
 
@@ -111,7 +111,7 @@ class ReactMakeCommandTest extends TestCase
         $this->assertSame(0, $result);
     }
 
-    public function test_it_uses_jsx_extension()
+    public function test_it_uses_provided_extension()
     {
         $this->mock(Filesystem::class, function (MockInterface $mock) {
             // Stubs.
@@ -122,11 +122,11 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/components/TestComponent.jsx'), 'template content'])
+                ->withArgs([resource_path('js/components/TestComponent.whatever'), 'template content'])
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--jsx' => true]);
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--extension' => 'whatever']);
         $this->assertSame(0, $result);
     }
 
@@ -142,7 +142,7 @@ class ReactMakeCommandTest extends TestCase
         $result = Artisan::call('make:react', ['name' => 'TestComponent']);
 
         $this->assertSame(0, $result);
-        $this->assertSame('Overridden stub', File::get(resource_path('js/components/TestComponent.js')));
+        $this->assertSame('Overridden stub', File::get(resource_path('js/components/TestComponent.jsx')));
     }
 
     public function test_it_publishes_stubs()
@@ -170,7 +170,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/components/sub/dir/TestComponent.js'), 'TestComponent'])
+                ->withArgs([resource_path('js/components/sub/dir/TestComponent.jsx'), 'TestComponent'])
                 ->once();
         });
 
@@ -191,36 +191,11 @@ class ReactMakeCommandTest extends TestCase
                 ->with(realpath(__DIR__.'/../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
-                ->once();
-        });
-
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
-        $this->assertSame(0, $result);
-    }
-
-    public function test_it_uses_tsx_extension()
-    {
-        $this->mock(Filesystem::class, function (MockInterface $mock) {
-            // Stubs.
-            $mock->allows([
-                'exists' => false,
-                'isDirectory' => true,
-            ]);
-            $mock->shouldReceive('get')
-                ->once()
-                ->with(realpath(__DIR__.'/../stubs/react.ts.stub'))
-                ->andReturn('template content');
-            $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.tsx'), 'template content'])
                 ->once();
         });
 
-        $result = Artisan::call('make:react', [
-            'name' => 'TestComponent',
-            '--typescript' => true,
-            '--jsx' => true,
-        ]);
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
         $this->assertSame(0, $result);
     }
 
@@ -237,7 +212,7 @@ class ReactMakeCommandTest extends TestCase
                 ->with(realpath(__DIR__.'/../stubs/react.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/pages/TestPage.js'), 'template content'])
+                ->withArgs([resource_path('js/pages/TestPage.jsx'), 'template content'])
                 ->once();
         });
 

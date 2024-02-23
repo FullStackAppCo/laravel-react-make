@@ -7,6 +7,9 @@
 - Removed semicolons from stubs
 - Upgraded to PHPUnit 10
 - Added absolute path handling
+- Updated extension defaults to jsx and tsx
+- Removed --jsx option
+- Added --extension option
 
 ## v3.0.0
 - Support Laravel 10

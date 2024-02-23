@@ -16,7 +16,7 @@ class ReactMakeCommand extends Command
     protected $signature = <<<'TEXT'
 make:react
     {name : The name of the React component}
-    {--x|jsx : Use .jsx file extension (tsx when used in combination with --typescript)}
+    {--x|extension= : Use the provided file extension}
     {--t|typescript : Generate a TypeScript component}
 TEXT;
 
@@ -54,7 +54,13 @@ TEXT;
 
     protected function getExtension(): string
     {
-        return ($this->option('typescript') ? 't' : 'j').($this->option('jsx') ? 'sx' : 's');
+        $override = $this->option('extension');
+
+        if (! is_null($override)) {
+            return $override;
+        }
+
+        return $this->option('typescript') ? 'tsx' : 'jsx';
     }
 
     protected function getStub(): string
