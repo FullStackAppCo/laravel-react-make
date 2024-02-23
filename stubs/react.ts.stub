@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react"
 
 interface DummyComponentProps {
     //
@@ -6,6 +6,6 @@ interface DummyComponentProps {
 
 export default function DummyComponent({}: DummyComponentProps) {
     return (
-      {/* */}
-    );
+        <span>DummyComponent</span>
+    )
 }

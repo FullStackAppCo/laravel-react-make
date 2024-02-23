@@ -17,7 +17,6 @@ class ReactMakeCommand extends Command
 make:react
     {name : The name of the React component}
     {--x|jsx : Use .jsx file extension (tsx when used in combination with --typescript)}
-    {--c|class : Create a class-based React component}
     {--t|typescript : Generate a TypeScript component}
 TEXT;
 
@@ -56,7 +55,7 @@ TEXT;
 
     protected function getStub(): string
     {
-        $stub = $this->option('class') ? 'react-class' : 'react';
+        $stub = 'react';
         $stub .= $this->option('typescript') ? '.ts' : '';
         $stub .= '.stub';
 

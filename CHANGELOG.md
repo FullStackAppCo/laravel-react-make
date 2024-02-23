@@ -1,5 +1,10 @@
 # Release Notes
 
+## Upcoming
+- Removed support for prop-types
+- Removed support for class-based components
+- Removed semicolons from stubs
+
 ## v3.0.0
 - Support Laravel 10
 - Dropped support for laravel 8

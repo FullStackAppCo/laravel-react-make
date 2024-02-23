@@ -11,7 +11,6 @@ class ServiceProvider extends BaseProvider
     {
         return [
             'react.stub',
-            'react-class.stub',
         ];
     }
 

@@ -159,29 +159,6 @@ class ReactMakeCommandTest extends TestCase
         }
     }
 
-    public function test_it_uses_class_component_stub()
-    {
-        File::deleteDirectory(base_path('stubs'));
-        File::deleteDirectory(resource_path('js/components'));
-
-        $this->mock(Filesystem::class, function (MockInterface $mock) {
-            // Stubs.
-            $mock->allows([
-                'exists' => false,
-                'isDirectory' => true,
-                'put' => 23,
-            ]);
-
-            $mock->shouldReceive('get')
-                ->with(realpath(__DIR__.'/../stubs/react-class.stub'))
-                ->once();
-        });
-
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--class' => true]);
-
-        $this->assertSame(0, $result);
-    }
-
     public function test_it_correctly_replaces_dummy_component()
     {
         $this->mock(Filesystem::class, function (MockInterface $mock) {
@@ -243,31 +220,6 @@ class ReactMakeCommandTest extends TestCase
             'name' => 'TestComponent',
             '--typescript' => true,
             '--jsx' => true,
-        ]);
-        $this->assertSame(0, $result);
-    }
-
-    public function test_it_uses_typescript_class_component_stub()
-    {
-        $this->mock(Filesystem::class, function (MockInterface $mock) {
-            // Stubs.
-            $mock->allows([
-                'exists' => false,
-                'isDirectory' => true,
-            ]);
-            $mock->shouldReceive('get')
-                ->once()
-                ->with(realpath(__DIR__.'/../stubs/react-class.ts.stub'))
-                ->andReturn('template content');
-            $mock->shouldReceive('put')
-                ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
-                ->once();
-        });
-
-        $result = Artisan::call('make:react', [
-            'name' => 'TestComponent',
-            '--class' => true,
-            '--typescript' => true,
         ]);
         $this->assertSame(0, $result);
     }
