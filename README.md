@@ -61,6 +61,13 @@ php artisan make:react -tx PrimaryButton
 # -> resources/js/components/PrimaryButton.tsx
 ```
 
+### Publishing Config
+If you'd like to customise the default configuration, including setting default option values:
+
+```bash
+php artisan vendor:publish --tag react-config
+```
+
 ### Customising Stubs
 If you'd like to customise the default templates used to generate components you may publish them
 to the `stubs` directory:

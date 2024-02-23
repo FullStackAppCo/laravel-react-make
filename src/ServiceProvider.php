@@ -25,6 +25,7 @@ class ServiceProvider extends BaseProvider
         ]);
 
         $this->publishesStubs();
+        $this->publishesConfig();
     }
 
     protected function publishesStubs(): void
@@ -36,5 +37,10 @@ class ServiceProvider extends BaseProvider
         }
 
         $this->publishes($publishes, 'react-stub');
+    }
+
+    protected function publishesConfig(): void
+    {
+        $this->publishes([__DIR__.'/../config/react.php' => config_path('react.php')], 'react-config');
     }
 }

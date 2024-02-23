@@ -5,6 +5,7 @@ namespace Tests\Console\Commands;
 use FullStackAppCo\ReactMake\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
@@ -17,6 +18,12 @@ class ReactMakeCommandTest extends TestCase
         return [
             ServiceProvider::class,
         ];
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Config::set('react', require(__DIR__.'/../../../config/react.php'));
     }
 
     public function test_it_requires_name_parameter()
@@ -65,6 +72,31 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $dirpath = resource_path('js/components/foo/bar');
+
+            $mock->shouldReceive('makeDirectory')
+                ->withArgs([$dirpath, 0777, true, true])
+                ->once()
+                ->andReturn(true);
+        });
+
+        $result = Artisan::call('make:react', ['name' => 'foo/bar/TestComponent']);
+        $this->assertSame(0, $result);
+    }
+
+    public function test_it_uses_prefix_config()
+    {
+        Config::set('react.prefix', 'Components');
+
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => false,
+                'get' => 'template content',
+                'put' => 23,
+            ]);
+
+            $dirpath = resource_path('js/Components/foo/bar');
 
             $mock->shouldReceive('makeDirectory')
                 ->withArgs([$dirpath, 0777, true, true])
@@ -208,6 +240,29 @@ class ReactMakeCommandTest extends TestCase
         $result = Artisan::call('make:react', [
             'name' => '/pages/TestPage',
         ]);
+        $this->assertSame(0, $result);
+    }
+
+    public function test_it_uses_configured_defaults()
+    {
+        Config::set('react.defaults', ['typescript' => true, 'extension' => 'ts']);
+
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
         $this->assertSame(0, $result);
     }
 }

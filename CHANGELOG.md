@@ -10,6 +10,7 @@
 - Updated extension defaults to jsx and tsx
 - Removed --jsx option
 - Added --extension option
+- Added config
 
 ## v3.0.0
 - Support Laravel 10

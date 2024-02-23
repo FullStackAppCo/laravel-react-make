@@ -44,7 +44,7 @@ TEXT;
         $segments = ['js'];
 
         if ($this->pathNotAbsolute($name)) {
-            $segments[] = 'components';
+            $segments[] = config('react.prefix');
         }
 
         $segments[] = ltrim($name, DIRECTORY_SEPARATOR).'.'.$this->getExtension();
@@ -103,6 +103,10 @@ TEXT;
      */
     public function handle()
     {
+        foreach (config('react.defaults') as $option => $value) {
+            $this->input->setOption($option, $value);
+        }
+
         $name = $this->argument('name');
         $path = $this->getPath($name);
 
