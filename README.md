@@ -2,7 +2,7 @@
 
 Quickly scaffold React components in your Laravel app. 
 
-## Laravel Support
+## Support
 
 | Laravel | Laravel React Make |
 |---------|--------------------|
