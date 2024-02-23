@@ -48,7 +48,7 @@ php artisan make:react --typescript PrimaryButton
 ### File Extension
 You may provide a custom file extension. The short version `-x` may also be used
 ```bash
-php artisan make:react --extension js
+php artisan make:react --extension js PrimaryButton
 # -> resources/js/components/PrimaryButton.js
 ```
 
