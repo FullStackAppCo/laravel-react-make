@@ -1,11 +1,6 @@
----
-published: true
-title: Laravel React Make
-description: Artisan command to generate React components with support for TypeScript.
-license: MIT
-source: FullStackAppCo/laravel-react-make
-pkg: fsac/laravel-react-make
----
+# Laravel React Make
+
+Quickly scaffold React components in your Laravel app. 
 
 ## Laravel Support
 
