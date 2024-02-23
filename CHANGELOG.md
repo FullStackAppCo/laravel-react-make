@@ -1,6 +1,7 @@
 # Release Notes
 
 ## Upcoming
+- Dropped support for Laravel 9
 - Dropped support for PHP 8.0 
 - Removed support for prop-types
 - Removed support for class-based components
