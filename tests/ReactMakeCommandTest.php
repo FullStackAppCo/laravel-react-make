@@ -18,9 +18,9 @@ class ReactMakeCommandTest extends TestCase
 
     public function test_it_requires_name_parameter()
     {
-        $this->expectErrorMessage('missing: "name"');
-
-        Artisan::call('make:react');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('missing: "name"');
+        $this->artisan('make:react');
     }
 
     public function test_it_checks_if_component_already_exists()

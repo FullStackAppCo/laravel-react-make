@@ -3,6 +3,5 @@
 .idea
 .DS_Store
 vendor
-phpunit.xml
 composer.lock
-.phpunit.result.cache
+.phpunit.cache
