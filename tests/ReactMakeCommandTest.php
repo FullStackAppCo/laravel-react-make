@@ -223,4 +223,27 @@ class ReactMakeCommandTest extends TestCase
         ]);
         $this->assertSame(0, $result);
     }
+
+    public function test_absolute_path()
+    {
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__.'/../stubs/react.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/pages/TestPage.js'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', [
+            'name' => '/pages/TestPage',
+        ]);
+        $this->assertSame(0, $result);
+    }
 }

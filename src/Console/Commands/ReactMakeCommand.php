@@ -27,25 +27,29 @@ TEXT;
      */
     protected $description = 'Create a new React component';
 
-    /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
-    public function __construct(Filesystem $files)
+    public function __construct(
+        protected Filesystem $files
+    )
     {
         parent::__construct();
+    }
 
-        $this->files = $files;
+    protected function pathNotAbsolute(string $path)
+    {
+        return ! str($path)->startsWith(DIRECTORY_SEPARATOR);
     }
 
     protected function getPath(string $name): string
     {
-        $relative = implode(DIRECTORY_SEPARATOR, ['js', 'components', "$name.{$this->getExtension()}"]);
+        $segments = ['js'];
 
-        return App::resourcePath($relative);
+        if ($this->pathNotAbsolute($name)) {
+            $segments[] = 'components';
+        }
+
+        $segments[] = ltrim($name, DIRECTORY_SEPARATOR).'.'.$this->getExtension();
+
+        return App::resourcePath(implode(DIRECTORY_SEPARATOR, $segments));
     }
 
     protected function getExtension(): string

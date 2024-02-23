@@ -6,6 +6,7 @@
 - Removed support for class-based components
 - Removed semicolons from stubs
 - Upgraded to PHPUnit 10
+- Added absolute path handling
 
 ## v3.0.0
 - Support Laravel 10

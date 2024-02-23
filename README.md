@@ -34,6 +34,12 @@ php artisan make:react buttons/Primary
 # -> resources/js/components/buttons/Primary.js
 ```
 
+Providing an absolute path will omit the `components` prefix, using `resources/js` as the root:
+```bash
+php artisan make:react /pages/Settings
+# -> resources/js/pages/Settings.js
+```
+
 ## Advanced Usage
 Use `.jsx` file extension instead of the default `.js`. The short version `-x` may also be used:
 ```bash
