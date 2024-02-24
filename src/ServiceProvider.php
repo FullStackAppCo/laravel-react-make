@@ -14,6 +14,11 @@ class ServiceProvider extends BaseProvider
         ];
     }
 
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/react.php', 'react');
+    }
+
     public function boot()
     {
         if (! $this->app->runningInConsole()) {

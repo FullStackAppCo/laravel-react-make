@@ -20,12 +20,6 @@ class ReactMakeCommandTest extends TestCase
         ];
     }
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        Config::set('react', require(__DIR__.'/../../../config/react.php'));
-    }
-
     public function test_it_requires_name_parameter()
     {
         $this->expectException(RuntimeException::class);
