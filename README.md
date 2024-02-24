@@ -54,17 +54,39 @@ php artisan make:react --typescript PrimaryButton
 ```
 
 ### File Extension
-You may provide a custom file extension. The short version `-x` may also be used
+You may provide a custom file extension. The short version `-x` may also be used:
 ```bash
 php artisan make:react --extension js PrimaryButton
 # -> resources/js/components/PrimaryButton.js
 ```
 
-### Publishing Config
-If you'd like to customise the default configuration, which includes setting default option values:
-
+### Configuration
+If you'd like to customise the default configuration you must publish the config file:
 ```bash
 php artisan vendor:publish --tag react-config
+```
+
+### Base Path
+To use a base path other than `resources/js` you may provide a value to the `base`
+configuration option:
+```php
+'base' => resource_path('ts'),
+```
+
+### Path Prefix
+When specifying relative paths the command will use the `components` prefix. You
+may change this prefix using the `prefix` configuration option:
+```php
+'prefix' => 'Components',
+```
+
+### Default Options
+Providing the same options each time you use the command, for example when working
+with a TypeScript codebase, can become tiresome. You may provide your own default
+option values using the `defaults` config property:
+
+```php
+'defaults' => ['typescript' => true],
 ```
 
 ### Customising Stubs

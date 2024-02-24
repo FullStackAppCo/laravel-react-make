@@ -3,6 +3,18 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Base Path
+    |--------------------------------------------------------------------------
+    |
+    | The base for absolute paths, onto which the path prefix will be added for
+    | relative paths. This will most likely be the directory in which you store
+    | your JavaScript or TypeScript source code.
+    |
+    */
+    'base' => resource_path('js'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Path Prefix
     |--------------------------------------------------------------------------
     |
@@ -20,7 +32,6 @@ return [
     | Provide default options to be passed to the command when it is called.
     | For example, to always use TypeScript and the file extension .ts
     | then change the value to ['typescript' => true, 'extension' => 'ts'].
-    | Options should be in the same format accepted by Artisan::call().
     |
     */
     'defaults' => [],

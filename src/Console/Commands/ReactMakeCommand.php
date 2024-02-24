@@ -47,7 +47,7 @@ TEXT;
 
     protected function getPath(string $name): string
     {
-        $segments = ['js'];
+        $segments = [config('react.base')];
 
         if ($this->pathNotAbsolute($name)) {
             $segments[] = config('react.prefix');
@@ -55,7 +55,7 @@ TEXT;
 
         $segments[] = ltrim($name, DIRECTORY_SEPARATOR).'.'.$this->getExtension();
 
-        return App::resourcePath(implode(DIRECTORY_SEPARATOR, $segments));
+        return implode(DIRECTORY_SEPARATOR, $segments);
     }
 
     protected function getExtension(): string
@@ -122,7 +122,7 @@ TEXT;
         }
 
         $this->makeDirectory($path);
-        $this->files->put($this->getPath($name), $this->buildComponent($name));
+        $this->files->put($path, $this->buildComponent($name));
         $this->info($name.' created successfully');
     }
 }

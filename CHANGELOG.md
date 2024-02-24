@@ -12,6 +12,7 @@
 - Removed --jsx option
 - Added --extension option
 - Added config
+- Added configurable base path
 
 ## v3.0.0
 - Support Laravel 10

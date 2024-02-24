@@ -282,4 +282,27 @@ class ReactMakeCommandTest extends TestCase
         $result = Artisan::call('make:react', ['name' => 'TestComponent', '--extension' => 'blaarg']);
         $this->assertSame(0, $result);
     }
+
+    public function test_it_uses_configured_base()
+    {
+        Config::set('react.base', resource_path('ts'));
+
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('ts/components/TestComponent.tsx'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
+        $this->assertSame(0, $result);
+    }
 }
