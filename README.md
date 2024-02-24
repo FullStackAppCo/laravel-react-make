@@ -1,8 +1,4 @@
-<h1 style="display: flex; flex-direction: row; align-items: center; gap: 7px;">Laravel React Make
-    <div style="width: 40px; height: 40px;">
-        <img style="transform: translateY(-2px)" alt="React logo" src="./graphics/react-icon.svg" />
-    </div>
-</h1>
+# Laravel React Make
 
 Quickly scaffold React components in your Laravel app using Artisan. Includes customisable template stubs and TypeScript support.
 
@@ -96,3 +92,7 @@ to the `stubs` directory:
 ```bash
 php artisan vendor:publish --tag react-stub
 ```
+
+
+## License
+This code is open sourced under the [MIT License](https://github.com/FullStackAppCo/laravel-react-make/blob/main/LICENSE.txt).
