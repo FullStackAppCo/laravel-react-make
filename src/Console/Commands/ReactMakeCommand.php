@@ -7,11 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 
 class ReactMakeCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = <<<'TEXT'
 make:react
     {name : The name of the React component}
@@ -19,11 +14,6 @@ make:react
     {--t|typescript : Generate a TypeScript component}
 TEXT;
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new React component';
 
     public function __construct(
@@ -97,11 +87,6 @@ TEXT;
         return str_replace('DummyComponent', basename($name), $stub);
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
         if (config('react.defaults.typescript')) {
@@ -111,7 +96,6 @@ TEXT;
         $name = $this->argument('name');
         $path = $this->getPath($name);
 
-        // TODO if not interactive then throw.
         if ($this->files->exists($path) && ! $this->confirm("Overwrite existing component {$name}?")) {
             return;
         }
