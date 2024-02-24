@@ -2,6 +2,7 @@
 
 namespace Tests\Console\Commands;
 
+use Closure;
 use FullStackAppCo\ReactMake\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
@@ -13,6 +14,17 @@ use Symfony\Component\Console\Exception\RuntimeException;
 
 class ReactMakeCommandTest extends TestCase
 {
+    protected function makeDirectoryArgs(string $dirpath)
+    {
+        return function (...$args) use ($dirpath) {
+            // Looks like the test filesystem makeDirectory has it's
+            // own default mode which differs from standard filesystem default.
+            return $args[0] === $dirpath && $args[2] === true && $args[3] === true;
+        };
+    }
+
+
+
     protected function getPackageProviders($app)
     {
         return [
@@ -68,9 +80,8 @@ class ReactMakeCommandTest extends TestCase
             $dirpath = resource_path('js/components/foo/bar');
 
             $mock->shouldReceive('makeDirectory')
-                ->withArgs([$dirpath, 0777, true, true])
-                ->once()
-                ->andReturn(true);
+                ->withArgs($this->makeDirectoryArgs($dirpath))
+                ->once();
         });
 
         $this
@@ -95,7 +106,7 @@ class ReactMakeCommandTest extends TestCase
             $dirpath = resource_path('js/Components/foo/bar');
 
             $mock->shouldReceive('makeDirectory')
-                ->withArgs([$dirpath, 0777, true, true])
+                ->withArgs($this->makeDirectoryArgs($dirpath))
                 ->once()
                 ->andReturn(true);
         });

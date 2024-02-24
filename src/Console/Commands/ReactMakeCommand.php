@@ -76,7 +76,7 @@ TEXT;
         $dirpath = dirname($path);
 
         if (! $this->files->isDirectory($dirpath)) {
-            $this->files->makeDirectory($dirpath, 0777, true, true);
+            $this->files->makeDirectory(path: $dirpath, recursive: true, force: true);
         }
     }
 
