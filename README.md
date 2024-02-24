@@ -10,7 +10,7 @@ php artisan make:react MyComponent
 
 | Laravel | Laravel React Make |
 |---------|--------------------|
-| 10      | 4                  |
+| 10      | 4 (beta)           |
 | 10, 9   | 3                  |
 | 9, 8    | 2                  |
 | 8, 7, 6 | 1                  |
