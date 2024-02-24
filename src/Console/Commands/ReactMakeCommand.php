@@ -3,9 +3,7 @@
 namespace FullStackAppCo\ReactMake\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Console\Parser;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\App;
 
 class ReactMakeCommand extends Command
 {
@@ -30,8 +28,7 @@ TEXT;
 
     public function __construct(
         protected Filesystem $files
-    )
-    {
+    ) {
         $this->signature = str_replace(
             '__EXTENSION__',
             config('react.defaults.extension', ''),

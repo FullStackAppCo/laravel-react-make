@@ -117,7 +117,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
 
             $mock->shouldReceive('get')
-                ->with(realpath(__DIR__ . '/../../../stubs/react.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.stub'))
                 ->once();
         });
 
@@ -217,7 +217,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.tsx'), 'template content'])
@@ -240,7 +240,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../../../stubs/react.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/pages/TestPage.jsx'), 'template content'])
@@ -265,7 +265,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.ts'), 'template content'])
@@ -290,7 +290,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('js/components/TestComponent.blaarg'), 'template content'])
@@ -315,7 +315,7 @@ class ReactMakeCommandTest extends TestCase
             ]);
             $mock->shouldReceive('get')
                 ->once()
-                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->with(realpath(__DIR__.'/../../../stubs/react.ts.stub'))
                 ->andReturn('template content');
             $mock->shouldReceive('put')
                 ->withArgs([resource_path('ts/components/TestComponent.tsx'), 'template content'])

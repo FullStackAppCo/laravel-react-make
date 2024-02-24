@@ -37,11 +37,16 @@
   "require-dev": {
     "phpunit/phpunit": "^10.5",
     "orchestra/testbench": "^8.0",
-    "laravel/pint": "^1.4"
+    "laravel/pint": "^1.14"
   },
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "format": [
+      "@php vendor/bin/pint"
+    ]
   }
 }
