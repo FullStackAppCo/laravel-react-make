@@ -1,4 +1,8 @@
-# Laravel React Make
+<h1 style="display: flex; flex-direction: row; align-items: center; gap: 7px;">Laravel React Make
+    <div style="width: 40px; height: 40px;">
+        <img style="transform: translateY(-2px)" alt="React logo" src="./graphics/react-icon.svg" />
+    </div>
+</h1>
 
 Quickly scaffold React components in your Laravel app. 
 
