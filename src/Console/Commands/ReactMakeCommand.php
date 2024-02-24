@@ -3,6 +3,7 @@
 namespace FullStackAppCo\ReactMake\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\Parser;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
 
@@ -16,7 +17,7 @@ class ReactMakeCommand extends Command
     protected $signature = <<<'TEXT'
 make:react
     {name : The name of the React component}
-    {--x|extension= : Use the provided file extension}
+    {--x|extension=__EXTENSION__ : Use the provided file extension}
     {--t|typescript : Generate a TypeScript component}
 TEXT;
 
@@ -31,6 +32,11 @@ TEXT;
         protected Filesystem $files
     )
     {
+        $this->signature = str_replace(
+            '__EXTENSION__',
+            config('react.defaults.extension', ''),
+            $this->signature,
+        );
         parent::__construct();
     }
 
@@ -103,8 +109,8 @@ TEXT;
      */
     public function handle()
     {
-        foreach (config('react.defaults') as $option => $value) {
-            $this->input->setOption($option, $value);
+        if (config('react.defaults.typescript')) {
+            $this->input->setOption('typescript', true);
         }
 
         $name = $this->argument('name');

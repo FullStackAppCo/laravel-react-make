@@ -237,7 +237,7 @@ class ReactMakeCommandTest extends TestCase
         $this->assertSame(0, $result);
     }
 
-    public function test_it_uses_configured_defaults()
+    public function test_it_uses_configured_default_options()
     {
         Config::set('react.defaults', ['typescript' => true, 'extension' => 'ts']);
 
@@ -256,7 +256,30 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
+        $result = Artisan::call('make:react', ['name' => 'TestComponent']);
+        $this->assertSame(0, $result);
+    }
+
+    public function test_cli_extension_option_overrides_configured_default()
+    {
+        Config::set('react.defaults', ['typescript' => true, 'extension' => 'ts']);
+
+        $this->mock(Filesystem::class, function (MockInterface $mock) {
+            // Stubs.
+            $mock->allows([
+                'exists' => false,
+                'isDirectory' => true,
+            ]);
+            $mock->shouldReceive('get')
+                ->once()
+                ->with(realpath(__DIR__ . '/../../../stubs/react.ts.stub'))
+                ->andReturn('template content');
+            $mock->shouldReceive('put')
+                ->withArgs([resource_path('js/components/TestComponent.blaarg'), 'template content'])
+                ->once();
+        });
+
+        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--extension' => 'blaarg']);
         $this->assertSame(0, $result);
     }
 }
