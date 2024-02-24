@@ -37,7 +37,8 @@
   "require-dev": {
     "phpunit/phpunit": "^10.5",
     "orchestra/testbench": "^8.0",
-    "laravel/pint": "^1.14"
+    "laravel/pint": "^1.14",
+    "larastan/larastan": "^2.9"
   },
   "autoload-dev": {
     "psr-4": {
@@ -47,6 +48,9 @@
   "scripts": {
     "format": [
       "@php vendor/bin/pint"
+    ],
+    "lint": [
+      "@php vendor/bin/phpstan"
     ]
   }
 }

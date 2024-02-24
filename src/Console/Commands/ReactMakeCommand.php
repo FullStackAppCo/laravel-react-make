@@ -81,15 +81,13 @@ TEXT;
         return realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'stubs', $stub]));
     }
 
-    protected function makeDirectory(string $path): string
+    protected function makeDirectory(string $path): void
     {
         $dirpath = dirname($path);
 
         if (! $this->files->isDirectory($dirpath)) {
-            return $this->files->makeDirectory($dirpath, 0777, true, true);
+            $this->files->makeDirectory($dirpath, 0777, true, true);
         }
-
-        return $path;
     }
 
     protected function buildComponent(string $name): string
@@ -121,5 +119,7 @@ TEXT;
         $this->makeDirectory($path);
         $this->files->put($path, $this->buildComponent($name));
         $this->info(basename($path).' created');
+
+        return 0;
     }
 }
