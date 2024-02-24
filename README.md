@@ -95,4 +95,4 @@ php artisan vendor:publish --tag react-stub
 
 
 ## License
-This code is open sourced under the [MIT License](https://github.com/FullStackAppCo/laravel-react-make/blob/main/LICENSE.txt).
+This code is open sourced under the [MIT License](LICENSE.txt).
