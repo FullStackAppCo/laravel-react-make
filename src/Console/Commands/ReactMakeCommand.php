@@ -123,6 +123,6 @@ TEXT;
 
         $this->makeDirectory($path);
         $this->files->put($path, $this->buildComponent($name));
-        $this->info($name.' created successfully');
+        $this->info(basename($path).' created');
     }
 }

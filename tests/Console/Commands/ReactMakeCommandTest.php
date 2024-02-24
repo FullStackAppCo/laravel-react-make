@@ -73,8 +73,10 @@ class ReactMakeCommandTest extends TestCase
                 ->andReturn(true);
         });
 
-        $result = Artisan::call('make:react', ['name' => 'foo/bar/TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'foo/bar/TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_uses_prefix_config()
@@ -98,8 +100,10 @@ class ReactMakeCommandTest extends TestCase
                 ->andReturn(true);
         });
 
-        $result = Artisan::call('make:react', ['name' => 'foo/bar/TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'foo/bar/TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_retrieves_stub()
@@ -117,8 +121,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_writes_component()
@@ -136,8 +142,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_uses_provided_extension()
@@ -155,8 +163,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--extension' => 'whatever']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent', '--extension' => 'whatever'])
+            ->expectsOutput('TestComponent.whatever created')
+            ->assertSuccessful();
     }
 
     public function test_it_uses_overridden_stubs()
@@ -168,9 +178,11 @@ class ReactMakeCommandTest extends TestCase
         File::makeDirectory(dirname($stubPath));
         File::put($stubPath, 'Overridden stub');
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent']);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
 
-        $this->assertSame(0, $result);
         $this->assertSame('Overridden stub', File::get(resource_path('js/components/TestComponent.jsx')));
     }
 
@@ -189,8 +201,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'sub/dir/TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'sub/dir/TestComponent'])
+            ->expectsOutput('TestComponent.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_supports_typescript()
@@ -210,8 +224,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent', '--typescript' => true])
+            ->expectsOutput('TestComponent.tsx created')
+            ->assertSuccessful();
     }
 
     public function test_absolute_path()
@@ -231,10 +247,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', [
-            'name' => '/pages/TestPage',
-        ]);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => '/pages/TestPage'])
+            ->expectsOutput('TestPage.jsx created')
+            ->assertSuccessful();
     }
 
     public function test_it_uses_configured_default_options()
@@ -256,8 +272,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent'])
+            ->expectsOutput('TestComponent.ts created')
+            ->assertSuccessful();
     }
 
     public function test_cli_extension_option_overrides_configured_default()
@@ -279,8 +297,10 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--extension' => 'blaarg']);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent', '--extension' => 'blaarg'])
+            ->expectsOutput('TestComponent.blaarg created')
+            ->assertSuccessful();
     }
 
     public function test_it_uses_configured_base()
@@ -302,7 +322,9 @@ class ReactMakeCommandTest extends TestCase
                 ->once();
         });
 
-        $result = Artisan::call('make:react', ['name' => 'TestComponent', '--typescript' => true]);
-        $this->assertSame(0, $result);
+        $this
+            ->artisan('make:react', ['name' => 'TestComponent', '--typescript' => 'true'])
+            ->expectsOutput('TestComponent.tsx created')
+            ->assertSuccessful();
     }
 }
