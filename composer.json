@@ -51,6 +51,9 @@
     ],
     "lint": [
       "@php vendor/bin/phpstan"
+    ],
+    "test ": [
+      "@php vendor/bin/phpunit"
     ]
   }
 }
