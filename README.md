@@ -4,7 +4,11 @@
     </div>
 </h1>
 
-Quickly scaffold React components in your Laravel app. 
+Quickly scaffold React components in your Laravel app using Artisan. Includes customisable template stubs and TypeScript support.
+
+```bash
+php artisan make:react MyComponent
+```
 
 ## Support
 
